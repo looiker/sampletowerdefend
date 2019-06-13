@@ -4,7 +4,8 @@ const TowerPosNodeState= {
     Invalid: -1,
     Null: 1,
     BuildMenu: 2,
-    Tower: 3
+    Tower: 3,
+    UpdateMenu: 4
 };
 
 cc.Class({
@@ -27,7 +28,13 @@ cc.Class({
         {
           default:[],
           type: cc.Prefab
-        }
+        },
+        
+          updateMenuPrefab:{
+            default: null,
+            type:cc.Prefab
+          }
+        
     
     },
     onLoad: function () {
@@ -42,7 +49,15 @@ cc.Class({
           setTouchEvent: function (node) {
           node.on(cc.Node.EventType.TOUCH_START, (event)=>{
           cc.log("touch node name = "+ event.target.name);
+          if(node.state === TowerPosNodeState.Null)
+          {
             this.showBuildMenu(event.target);
+          }
+          else if(node.state === TowerPosNodeState.Tower)//如果是有塔的时候才显示更新菜单
+          {
+            this.showUpdateMenu(event.target);
+          }
+           
           });
         },
           showBuildMenu: function (node) {
@@ -55,8 +70,21 @@ cc.Class({
               node.menu = menu;
 
             }
+           
          
           },
+          showUpdateMenu: function(node){
+            this.closeBuildMenu();
+            let menu = cc.instantiate(this.updateMenuPrefab);
+            menu.parent = this.node;
+            menu.position = node.position;//位置
+            this.setState(node, TowerPosNodeState.UpdateMenu);
+            node.updateMenu = menu;
+
+              
+          },
+
+
           closeBuildMenu: function(){
             for(let i=0; i<this.towerPosNodes.length; i++){
                 let node = this.towerPosNodes[i];

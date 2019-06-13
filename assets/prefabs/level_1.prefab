@@ -1696,6 +1696,9 @@
         "__uuid__": "5c31fd40-f4d8-49db-a60d-cec6950f60a2"
       }
     ],
+    "updateMenuPrefab": {
+      "__uuid__": "25b9a91b-894f-4188-a24c-af10839cb951"
+    },
     "_id": ""
   },
   {
