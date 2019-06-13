@@ -1,4 +1,4 @@
-import global from './gloabl';
+import global from './global';
 
 cc.Class({
     extends: cc.Component,
@@ -14,7 +14,7 @@ cc.Class({
     buttonClick:function(event,coustomData)
     {
         cc.log("button click" + coustomData);
-        global.event.fire("build_tower",coustomData)
+        global.event.fire("build_tower",coustomData);
     },
 
 

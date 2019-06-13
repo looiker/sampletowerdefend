@@ -1,4 +1,4 @@
-import global from './gloabl'
+import global from './global'
 
 const TowerPosNodeState= {
     Invalid: -1,
@@ -62,7 +62,7 @@ cc.Class({
         },
           showBuildMenu: function (node) {
             if(node.state === TowerPosNodeState.Null){ 
-              this.closeBuildMenu();
+              this.closeMenu();
               let menu = cc.instantiate(this.buildMenuPrefab);
               menu.parent = this.node;
               menu.position = node.position;
@@ -74,24 +74,29 @@ cc.Class({
          
           },
           showUpdateMenu: function(node){
-            this.closeBuildMenu();
+            this.closeMenu();
             let menu = cc.instantiate(this.updateMenuPrefab);
             menu.parent = this.node;
             menu.position = node.position;//位置
             this.setState(node, TowerPosNodeState.UpdateMenu);
-            node.updateMenu = menu;
+            node.menu = menu;
 
               
           },
 
 
-          closeBuildMenu: function(){
+          closeMenu: function(){
             for(let i=0; i<this.towerPosNodes.length; i++){
                 let node = this.towerPosNodes[i];
                 if(node.state === TowerPosNodeState.BuildMenu){
                     node.menu.destroy();
                     this.setState(node, TowerPosNodeState.Null)
                     return node;
+                }
+                if(node.state === TowerPosNodeState.UpdateMenu){
+                    node.menu.destroy();
+                      this.setState(node, TowerPosNodeState.Tower)
+                      return node;
                 }
             }
           },
@@ -115,7 +120,7 @@ cc.Class({
           buildTower: function(data)
           {  
             cc.log("build tower" + data);
-            let node = this.closeBuildMenu();
+            let node = this.closeMenu();
             let tower = cc.instantiate(this.towerPrefabs[data]);
             tower.parent = this.node;
             tower.position = node.position;
