@@ -3,7 +3,8 @@ import global from './gloabl'
 const TowerPosNodeState= {
     Invalid: -1,
     Null: 1,
-    BuildMenu: 2 
+    BuildMenu: 2,
+    Tower: 3
 };
 
 cc.Class({
@@ -22,6 +23,11 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
+        towerPrefabs:
+        {
+          default:[],
+          type: cc.Prefab
+        }
     
     },
     onLoad: function () {
@@ -40,18 +46,24 @@ cc.Class({
           });
         },
           showBuildMenu: function (node) {
-            this.closeBuildMenu();
-            let menu = cc.instantiate(this.buildMenuPrefab);
-            menu.parent = this.node;
-            menu.position = node.position;
-            this.setState(node, TowerPosNodeState.BuildMenu);
-            node.menu = menu;
+            if(node.state === TowerPosNodeState.Null){ 
+              this.closeBuildMenu();
+              let menu = cc.instantiate(this.buildMenuPrefab);
+              menu.parent = this.node;
+              menu.position = node.position;
+              this.setState(node, TowerPosNodeState.BuildMenu);
+              node.menu = menu;
+
+            }
+         
           },
           closeBuildMenu: function(){
             for(let i=0; i<this.towerPosNodes.length; i++){
                 let node = this.towerPosNodes[i];
                 if(node.state === TowerPosNodeState.BuildMenu){
                     node.menu.destroy();
+                    this.setState(node, TowerPosNodeState.Null)
+                    return node;
                 }
             }
           },
@@ -75,6 +87,12 @@ cc.Class({
           buildTower: function(data)
           {  
             cc.log("build tower" + data);
+            let node = this.closeBuildMenu();
+            let tower = cc.instantiate(this.towerPrefabs[data]);
+            tower.parent = this.node;
+            tower.position = node.position;
+            this.setState(node, TowerPosNodeState.Tower);
+            node.tower = tower;
           },
        
           onDestroy: function ()

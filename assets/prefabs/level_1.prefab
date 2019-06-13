@@ -1688,6 +1688,14 @@
     "buildMenuPrefab": {
       "__uuid__": "462e3249-3d54-4fb2-a5ef-faec9bed0e73"
     },
+    "towerPrefabs": [
+      {
+        "__uuid__": "fe22111c-a1d0-450d-9997-49ac2484d1be"
+      },
+      {
+        "__uuid__": "5c31fd40-f4d8-49db-a60d-cec6950f60a2"
+      }
+    ],
     "_id": ""
   },
   {
