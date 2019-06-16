@@ -1,6 +1,6 @@
 {
   "ver": "2.2.0",
-  "uuid": "744d0990-f812-4af3-ac1f-e62d9c08e2af",
+  "uuid": "45745163-d24c-40c2-aa7b-1423533d004b",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -8,8 +8,8 @@
   "subMetas": {
     "mash_room_6": {
       "ver": "1.0.3",
-      "uuid": "2962f3df-4565-4567-86c2-ae88fbe8ba40",
-      "rawTextureUuid": "744d0990-f812-4af3-ac1f-e62d9c08e2af",
+      "uuid": "04eeae69-0df0-48d9-ba22-9f60de0bf424",
+      "rawTextureUuid": "45745163-d24c-40c2-aa7b-1423533d004b",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
